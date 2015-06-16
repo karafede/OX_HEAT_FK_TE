@@ -2,11 +2,11 @@
 <html>
 <head>
 	<title>index</title>
-	<meta charset="utf-8" />
+	<meta charset="utf-8">
+	<meta name="generator" content="leafletR">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-	<link rel="dat1" type="application/json" href=".geojson" />
 	<style type="text/css">
 		body {
 			padding: 0;
@@ -75,9 +75,24 @@
 			stroke-opacity: 0.5;
 			stroke-linejoin: round;
 		}
+		.mrks {
+		    padding: 0px;
+			text-align: center;
+		    height:30px;
+		}
+		.mrkm {
+			padding: 0px;
+			text-align: center;
+		    height:40px;
+		}
+		.mrkl {
+			padding: 0px;
+			text-align: center;
+		    height:52px;
+		}
 		.legend i {
 			opacity: 0.5;
-		}				
+		}
 	</style>
 </head>
 <body>
@@ -109,18 +124,18 @@
 		// styling
 		function getValue(x) {
 			return x > 49 ? "#808080" :
-			       x > 42 ? "#FF0000" :
-			       x > 40 ? "#FF5500" :
-			       x > 39 ? "#FFAA00" :
-			       x > 38 ? "#FFFF00" :
-			       x > 32 ? "#FFFF80" :
+			       x >= 42 ? "#FF0000" :
+			       x >= 40 ? "#FF5500" :
+			       x >= 39 ? "#FFAA00" :
+			       x >= 38 ? "#FFFF00" :
+			       x >= 32 ? "#FFFF80" :
 			       "#808080";
 		}			
 		function style1(feature) {
 			return {
-				"color": getValue(feature.properties["Human_Activity_Summer_2014"]),
+				"fillColor": getValue(feature.properties["Human_Activity_Summer_2014"]),
 
-				"weight": 1, "fillOpacity": 0.5
+				"color": "#000000", "weight": 1, "fillOpacity": 0.5
 			};
 		}
 
@@ -242,7 +257,8 @@
 					div.innerHTML += 'Human_Activity (Summer, 2014)<br>'
 					for (var i = 0; i < grades.length-1; i++) { 
 						div.innerHTML +=
-						        '<i style="background:' + getValue(grades[i]+(grades[1]-grades[0])*0.01) + '"></i> ' + 								grades[i] + '&ndash;' + grades[i + 1] + '<br>';
+						        '<i style="background:' + getValue(grades[i]) + '"></i> ' +
+						        								grades[i] + '&ndash;' + grades[i + 1] + '<br>';
 					}
 					
 				
